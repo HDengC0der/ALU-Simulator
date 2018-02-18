@@ -1,0 +1,67 @@
+using System;
+using System.Drawing;
+using System.Collections;
+using System.ComponentModel;
+using System.Windows.Forms;
+using System.Data;
+using System.Text;
+
+public class Form1:System.Windows.Forms.Form
+{
+        private System.Windows.Forms.Button btnADD;
+        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btnOr;
+        private System.Windows.Forms.Button btnXor;
+        private System.Forms.Label lblInt1Bits;
+        private System.Forms.Label lblint2Bits;
+        private System.Forms.TextBox txtInt1;
+        private System.Forms.TextBox txtInt2;
+    private void bitAdd_Click(object sender,System.EventArgs e){
+        int val1, val2;
+        val1 = Int32.Parse(txtInt1.Text);
+        val2 = Int32.Parse(txtInt2.Text);
+        lblInt1Bits.Text = ConvertBits(val1).ToString();
+        lblint2Bits.Text = ConvertBits(val2).ToString();
+    }
+    private StringBuilder ConvertBits(int val)
+    {
+        int bitmask = 1 << 31;
+        StringBuilder bitBuffer = new StringBuilder(35);
+        for (int i = 1; i <= 32; i++)
+        {
+            if ((val == 0 && bitmask == 0)
+                bitBuffer.Append("0");
+            else
+                bitBuffer.Append("1");
+            val <<= 1;
+            if ((i % 8) == 0)
+                bitBuffer.Append(" ");
+        }
+        return bitBuffer;
+    }
+    private void btnClear_Click(object sender, System.EventArgs e){
+        txtInt1.Text = " ";
+        txtInt2.Text = " ";
+        lblInt1Bits.Text = " ";
+        lblint2Bits.Text = " ";
+        txtInt1.Focus();
+    }
+    private void btnOr_Click(object sender, System.EventArgs e){
+        int val1, val2;
+        val1 = Int32.Parse(txtInt1.Text);
+        val2 = Int32.Parse(txtInt2.Text);
+        lblInt1Bits.Text = ConvertBits(val1).ToString();
+        lblint2Bits.Text = ConvertBits(val1).ToString();
+        lblBitResult.Text = ConvertBits(val1 || val2).ToString();
+    }
+    private void btnXOr_Click(object sender, System.EventArgs e){
+        int val1, val2;
+        val1 = Int32.Parse(txtInt1.Text);
+        val2 = Int32.Parse(txtInt2.Text);
+        lblInt1Bits.Text = ConvertBits(val1).ToString();
+        lblint2Bits.Text = ConvertBits(val2).ToString();
+        lblBitResult.Text = ConvertBits(val1 ^ val2).ToString();
+    }
+}
+
+
